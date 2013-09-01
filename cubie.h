@@ -15,22 +15,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <GL/gl.h>
+#include <GL/glu.h>
 #include <QVector>
 
 typedef enum {blanco, rojo, verde, azul, amarillo, naranja, negro} color;
 
 class cubie {
     private:
-        QVector<color> *pegatinas;
-        static int permutacionPegatinas[3][4];
-        static int geometriacubie[6][4][3];
-        static float colorPegatinas[7][3];
+        QVector<color> *stickers;
+        static int stickerPermutations[3][4];
+        static int cubieGeometry[6][4][3];
+        static float stickerColor[7][3];
+        void createCylinder();
+        GLUquadricObj *quadratic;
     public:
         cubie();
         cubie(cubie &orig);
-        cubie(color *pegatinas);
+        cubie(color *stickers);
         ~cubie();
         void draw();
-        void permutate(int p);
+        void permutate(int p, bool clockwise);
 
 };

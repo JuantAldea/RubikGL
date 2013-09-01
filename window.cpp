@@ -25,7 +25,7 @@ MainWindow::MainWindow()
     this->setCentralWidget(visor);
     this->visor->setClearColor(QColor(128, 128, 128));
     this->centralWidget()->setFocus();
-    setWindowTitle(tr("Cubo de Rubik"));
+    setWindowTitle(tr("Rubik - Juan Antonio Aldea Armenteros"));
 }
 
 MainWindow::~MainWindow()

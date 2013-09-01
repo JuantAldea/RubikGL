@@ -16,36 +16,35 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "rubikCube.h"
 #include <iostream>
-
 using namespace std;
 
 int rubikCube::cubiesPermutations[9][2][4] = {
-    //X
+    //Permutaciones sobre el eje X
     {{0, 18, 24, 6}, {7, 9, 25, 15}},
     {{1, 19, 23, 5}, {8, 10, 26, 14}},
     {{2, 20, 22, 4}, {3, 11, 21, 13}},
-    //Y
+    //Permutaciones sobre el eje Y
     {{0, 6, 4, 2}, {1, 7, 5, 3}},
     {{9, 15, 13, 11}, {10, 16, 14, 12}},
     {{18, 24, 22, 20}, {19, 25, 23, 21}},
-    //Z
+    //Permutaciones sobre el eje Z
     {{4, 6, 24, 22}, {5, 15, 23, 13}},
     {{3, 7, 25, 21}, {8, 16, 26, 12}},
     {{0, 18, 20, 2}, {1, 9, 19, 11}},
 };
 
 float rubikCube::cubiesPositions[27][3] = {
-    //primera rodaja horizontal
+    //1ª rodaja horizontal
     {-1, -1, 1}, {0, -1, 1}, {1, -1, 1}, {1, -1, 0}, {1, -1, -1}, {0, -1, -1}, {-1, -1, -1}, {-1, -1, 0}, {0, -1, 0},
-    //segunda rodaja horizontal
+    //2ª rodaja horizontal
     {-1, 0, 1}, {0, 0, 1}, {1, 0, 1}, {1, 0, 0}, {1, 0, -1}, {0, 0, -1}, {-1, 0, -1}, {-1, 0, 0}, {0, 0, 0},
-    //tercera rodaja horizontal
+    //3ª rodaja horizontal
     {-1, 1, 1}, {0, 1, 1}, {1, 1, 1}, {1, 1, 0}, {1, 1, -1}, {0, 1, -1}, {-1, 1, -1}, {-1, 1, 0}, {0, 1, 0},
 };
 
 color rubikCube::cubiesColors[27][6] = {
     //(trasera, arriba, derecha, izquierda, abajo, frontal)
-    //primera rodaza horizontal
+    //primera rodaja horizontal
     {negro, negro, negro, amarillo, rojo, blanco},
     {negro, negro, negro, negro,    rojo, blanco},
     {negro, negro, verde, negro,    rojo, blanco},
@@ -56,7 +55,7 @@ color rubikCube::cubiesColors[27][6] = {
     {negro, negro, negro, amarillo, rojo, negro},
     {negro, negro, negro, negro,    rojo, negro},
 
-    //2ª rodaza horizontal
+    //2ª rodaja horizontal
 
     {negro, negro, negro, amarillo, negro, blanco},
     {negro, negro, negro, negro,    negro, blanco},
@@ -68,7 +67,7 @@ color rubikCube::cubiesColors[27][6] = {
     {negro, negro, negro, amarillo, negro, negro},
     {negro, negro, negro, negro,    negro, negro},
 
-    //3ª rodaza horizontal
+    //3ª rodaja horizontal
 
     {negro, naranja, negro, amarillo, negro, blanco},
     {negro, naranja, negro, negro,    negro, blanco},
@@ -83,15 +82,15 @@ color rubikCube::cubiesColors[27][6] = {
 };
 
 int rubikCube::cubiesSlices[9][9] = {
-    //X
+    //Rodajas en X
     {6, 7, 0, 9, 18, 25, 24, 15, 16},
     {1, 19, 23, 5, 8, 10, 26, 14, 17},
     {2, 20, 22, 4, 3, 11, 21, 13, 12},
-    //Y
+    //Rodajas en Y
     {0, 6, 4, 2, 1, 7, 5, 3, 8},
     {9, 15, 13, 11, 10, 16, 14, 12, 17},
     {18, 24, 22, 20, 19, 25, 23, 21, 26},
-    //Z
+    //Rodajas en Z
     {4, 6, 24, 22, 5, 15, 23, 13, 14},
     {3, 7, 25, 21, 8, 16, 26, 12, 17},
     {0, 18, 20, 2, 1, 9, 19, 11, 10}
@@ -118,16 +117,25 @@ rubikCube::~rubikCube()
     delete this->rotatingCubies;
 }
 
-void rubikCube::rotate(QString rotation)
+bool rubikCube::rotate(QString rotation)
 {
+    if(rotation[0] == '-'){
+        this->clockwiseRotation = true;
+    }
+    else{
+        this->clockwiseRotation = false;
+    }
+
+    rotation.remove(0, 1);//elimina el caracter de signo
+    if (rotation[0] == 'H'){
+        return false;
+    }
+    //marca la rodaja N como rodaja a rotar y establece el eje de rotacion
     if (rotation == "X0"){
         this->rotatingSlice = 0;
         this->rotationAxis[0] = 1;
         this->rotationAxis[1] = 0;
         this->rotationAxis[2] = 0;
-        //testigo, no borrar
-        //this->permutate(rubikCube::permutacionesCubies[0][0], 0);
-        //this->permutate(rubikCube::permutacionesCubies[0][1], 0);
     }
     else if (rotation == "X1"){
         this->rotatingSlice = 1;
@@ -178,12 +186,13 @@ void rubikCube::rotate(QString rotation)
         this->rotationAxis[2] = 1;
     }
 
+    //Marca los cubitos pertenecientes a la la rodaja seleccionada como cubitos a rotar
     this->rotationAngle = 0;
     for (int i=0; i<9; i++){
         this->rotatingCubies->insert(rubikCube::cubiesSlices[this->rotatingSlice][i]);
     }
 
-    return;
+    return true;
 }
 
 void rubikCube::draw()
@@ -194,7 +203,6 @@ void rubikCube::draw()
             if(this->rotatingCubies->contains(i)){
                 glRotatef(this->rotationAngle, this->rotationAxis[0], this->rotationAxis[1], this->rotationAxis[2]);
             }
-
             glTranslated(rubikCube::cubiesPositions[i][0], rubikCube::cubiesPositions[i][1], rubikCube::cubiesPositions[i][2]);
             glPushName(i);
             this->cubies->at(i)->draw();
@@ -206,97 +214,116 @@ void rubikCube::draw()
     return;
 }
 
-void rubikCube::permutate(int *p, int eje)
+void rubikCube::permutate(int *p, int axis, bool clockwise)
 {
     cubie *aux1, *aux2;
-    aux2 = this->cubies->at(p[3]);
-    for (int i = 0; i < 4; i++){
-        aux1 = this->cubies->at(p[i]);
-        this->cubies->operator [](p[i]) = aux2;
-        aux2 = aux1;
-        aux2->permutate(eje);
+    if (clockwise){
+        aux2 = this->cubies->at(p[3]);
+        for (int i = 0; i < 4; i++){
+            aux1 = this->cubies->at(p[i]);
+            this->cubies->operator [](p[i]) = aux2;
+            aux2 = aux1;
+            aux2->permutate(axis, clockwise);
+        }
+    }
+    else{
+        aux2 = this->cubies->at(p[0]);
+        for (int i = 3; i >= 0; i--){
+            aux1 = this->cubies->at(p[i]);
+            this->cubies->operator [](p[i]) = aux2;
+            aux2 = aux1;
+            aux2->permutate(axis, clockwise);
+        }
     }
 
     return;
 }
 
-void rubikCube::animate()
+void rubikCube::updateAnimation()
 {
-    this->rotationAngle -= 90/25.0; //90 grados en 1 segundo con 25 actualizaciones por segundo (40ms)
+    //90 grados en 1 segundo con 25 actualizaciones por segundo (40ms)
+    if (this->clockwiseRotation)
+        this->rotationAngle -= 90/20.0;
+    else
+        this->rotationAngle += 90/20.0;
 }
 
 void rubikCube::finishAnimation()
 {
     this->rotationAngle = 0;
-    this->rotatingCubies->clear();
-    this->permutate(rubikCube::cubiesPermutations[this->rotatingSlice][0], this->rotatingSlice/3);
-    this->permutate(rubikCube::cubiesPermutations[this->rotatingSlice][1], this->rotatingSlice/3);
+    this->rotatingCubies->clear(); //no hay cubos rotando
+    //acabada la animacion, aplicar la permutacion.
+    this->permutate(rubikCube::cubiesPermutations[this->rotatingSlice][0], this->rotatingSlice/3, this->clockwiseRotation);
+    this->permutate(rubikCube::cubiesPermutations[this->rotatingSlice][1], this->rotatingSlice/3, this->clockwiseRotation);
 
     return;
 }
 
-//pensar mas en este prototipo, deberia estar en la clase rubikcube
-QString rubikCube::convertirMovimiento(QList<uint> *lista, int deltaX, int deltaY)
+
+//busca el grupo al que pertenece el cubito pulsado
+//para devolver el nombre del movimiento X0, X1, X2...
+QString rubikCube::determineRotation(QList<uint> *selectionList, float deltaX, float deltaY, float deltaZ)
 {
-    bool movimientoEnX = abs(deltaX) > abs(deltaY);
-    uint cubito = lista->at(0);
-    uint cara = lista->at(1);
-    //(trasera, arriba, derecha, izquierda, abajo, frontal)
-    //(0, 1, 2, 3, 4, 5)
-    /*
-    frontal:
-        deltaX -> giro sobre Y
-        deltaY -> giro sobre X
-    trasera:
-        deltaX -> giro sobre Y
-        deltaY -> giro sobre X
-
-    arriba:
-        deltaX -> giro sobre Z
-        deltaY -> giro sobre X
-    abajo:
-        deltaX -> giro sobre Z
-        deltaY -> giro sobre X
-
-    izquierda:
-        deltaX -> giro sobre Y
-        deltaY -> giro sobre Z
-    derecha:
-        deltaX -> giro sobre Y
-        deltaY -> giro sobre Z
-
+    /*(trasera, arriba, derecha, izquierda, abajo, frontal)
+    (0, 1, 2, 3, 4, 5)
       frontal <=> trasera
        arriba <=> abajo
     izquierda <=> derecha
     */
-    bool encontrado = false;
-    int rodaja, desplazamiento;
-    char eje = 'H';
-    rodaja = -1;
-    //SACAR UNA FUNCION PARA ESTA MIERDA
-    switch(cara){
+
+    float maxDelta;
+    uint cubie = selectionList->at(0);
+    uint face = selectionList->at(1);
+    bool found = false;
+    int slice, offset;
+    char axis, rotationSign = '+', mouseAxis;
+    axis = 'H';
+    slice = -1;
+    //cout << cubie << ' ' << face << endl;
+    maxDelta = fabs(deltaX);
+    cout << deltaX << endl;
+    mouseAxis = 'X';
+    if (fabs(deltaY) > maxDelta){
+        maxDelta = fabs(deltaY);
+        mouseAxis = 'Y';
+    }
+    if (fabs(deltaZ) > maxDelta){
+        maxDelta = fabs(deltaZ);
+        mouseAxis = 'Z';
+    }
+    cout << maxDelta << endl;
+    cout << mouseAxis << endl;
+
+    /******************************
+    / a partir de la cara seleccionada y el movimiento realizado con el raton
+    /se determina el eje de rotacion, cada eje tiene permutaciones posibles
+    /(seis contando las invertidas) hay que buscar en cual de las tres permutaciones
+    /esta el cubo seleccionado. Determinada la permutacion a aplicar se calcula el signo
+    /esto es, si se aplica en orden normal o en orden inverso.
+    ****************************/
+    switch(face){
         case 0:
         case 5:
-            if(movimientoEnX){//giro en Y
-                eje = 'Y';
-                desplazamiento = 3; //en 3 empiezan las rodajas de Y
-                for (int i = 0; i < 3 && !encontrado; i++){
-                    for (int j=0; j < 9 && !encontrado; j++){
-                        if (rubikCube::cubiesSlices[desplazamiento + i][j] == cubito){
-                            encontrado = true;
-                            rodaja = i;
+            if(mouseAxis == 'X'){//giro en Y
+                axis = 'Y';
+                offset = 3; //en 3 empiezan las rodajas de Y
+                for (int i = 0; i < 3 && !found; i++){
+                    for (int j=0; j < 9 && !found; j++){
+                        if (rubikCube::cubiesSlices[offset + i][j] == (int)cubie){
+                            found = true;
+                            slice = i;
                         }
                     }
                 }
             }
-            else{//giro en X
-                eje = 'X';
-                desplazamiento = 0; //en 3 empiezan las rodajas de X
-                for (int i = 0; i < 3 && !encontrado; i++){
-                    for (int j=0; j < 9 && !encontrado; j++){
-                        if (rubikCube::cubiesSlices[desplazamiento + i][j] == cubito){
-                            encontrado = true;
-                            rodaja = i;
+            else if(mouseAxis == 'Y'){//giro en X
+                axis = 'X';
+                offset = 0; //en 0 empiezan las rodajas de X
+                for (int i = 0; i < 3 && !found; i++){
+                    for (int j=0; j < 9 && !found; j++){
+                        if (rubikCube::cubiesSlices[offset + i][j] == (int)cubie){
+                            found = true;
+                            slice = i;
                         }
                     }
                 }
@@ -306,67 +333,117 @@ QString rubikCube::convertirMovimiento(QList<uint> *lista, int deltaX, int delta
 
         case 1:
         case 4:
-            if(movimientoEnX){
+            if(mouseAxis == 'X'){
                 //giro en Z
-                eje = 'Z';
-                desplazamiento = 6; //en 6 empiezan las rodajas de Z
-                for (int i = 0; i < 3 && !encontrado; i++){
-                    for (int j=0; j < 9 && !encontrado; j++){
-                        if (rubikCube::cubiesSlices[desplazamiento + i][j] == cubito){
-                            encontrado = true;
-                            rodaja = i;
+                axis = 'Z';
+                offset = 6; //en 6 empiezan las rodajas de Z
+                for (int i = 0; i < 3 && !found; i++){
+                    for (int j=0; j < 9 && !found; j++){
+                        if (rubikCube::cubiesSlices[offset + i][j] == (int)cubie){
+                            found = true;
+                            slice = i;
                         }
                     }
                 }
             }
-            else{
+            else if(mouseAxis == 'Z'){
                 //giro en X
-                eje = 'X';
-                desplazamiento = 0; //en 3 empiezan las rodajas de X
-                for (int i = 0; i < 3 && !encontrado; i++){
-                    for (int j=0; j < 9 && !encontrado; j++){
-                        if (rubikCube::cubiesSlices[desplazamiento + i][j] == cubito){
-                            encontrado = true;
-                            rodaja = i;
+                axis = 'X';
+                offset = 0; //en 3 empiezan las rodajas de X
+                for (int i = 0; i < 3 && !found; i++){
+                    for (int j=0; j < 9 && !found; j++){
+                        if (rubikCube::cubiesSlices[offset + i][j] == (int)cubie){
+                            found = true;
+                            slice = i;
                         }
                     }
                 }
             }
-
             break;
 
         case 2:
         case 3:
-            if(movimientoEnX){
+            if(mouseAxis == 'Z'){
                 //giro en Y
-                eje = 'Y';
-                desplazamiento = 3; //en 6 empiezan las rodajas de Z
-                for (int i = 0; i < 3 && !encontrado; i++){
-                    for (int j=0; j < 9 && !encontrado; j++){
-                        if (rubikCube::cubiesSlices[desplazamiento + i][j] == cubito){
-                            encontrado = true;
-                            rodaja = i;
+                axis = 'Y';
+                offset = 3; //en 6 empiezan las rodajas de Z
+                for (int i = 0; i < 3 && !found; i++){
+                    for (int j=0; j < 9 && !found; j++){
+                        if (rubikCube::cubiesSlices[offset + i][j] == (int)cubie){
+                            found = true;
+                            slice = i;
                         }
                     }
                 }
             }
-            else{
+            else if(mouseAxis == 'Y'){
                 //giro en Z
-                eje = 'Z';
-                desplazamiento = 6; //en 6 empiezan las rodajas de Z
-                for (int i = 0; i < 3 && !encontrado; i++){
-                    for (int j=0; j < 9 && !encontrado; j++){
-                        if (rubikCube::cubiesSlices[desplazamiento + i][j] == cubito){
-                            encontrado = true;
-                            rodaja = i;
+                axis = 'Z';
+                offset = 6; //en 6 empiezan las rodajas de Z
+                for (int i = 0; i < 3 && !found; i++){
+                    for (int j=0; j < 9 && !found; j++){
+                        if (rubikCube::cubiesSlices[offset + i][j] == (int)cubie){
+                            found = true;
+                            slice = i;
                         }
                     }
                 }
             }
             break;
     }
-    cout << (QString("%1%2").arg(eje).arg(rodaja)).toStdString() << endl;
 
-    return QString("%1%2").arg(eje).arg(rodaja);
+    //calculo del signo de la rotacion
+    switch (face){
+        case 0: //Trasera
+            if (mouseAxis == 'Y'){
+                rotationSign = (deltaY > 0)?'+':'-';
+            }else if(mouseAxis == 'X'){
+                rotationSign = (deltaX > 0)?'-':'+';
+            }
+            break;
+
+        case 1://arriba
+            if (mouseAxis == 'X'){
+                rotationSign = (deltaX > 0)?'-':'+';
+            }else if(mouseAxis == 'Z'){
+                rotationSign = (deltaZ > 0)?'+':'-';
+            }
+            break;
+
+        case 2://derecha
+            if (mouseAxis == 'Z'){
+                rotationSign = (deltaZ > 0)?'-':'+';
+            }else if(mouseAxis == 'Y'){
+                rotationSign = (deltaY > 0)?'+':'-';
+            }
+            break;
+
+        case 3://izquierda
+            if (mouseAxis == 'Z'){
+                rotationSign = (deltaZ > 0)?'+':'-';
+            }else if(mouseAxis == 'Y'){
+                rotationSign = (deltaY > 0)?'-':'+';
+            }
+            break;
+
+        case 4://abajo
+            if (mouseAxis == 'X'){
+                rotationSign = (deltaX > 0)?'+':'-';
+            }else if(mouseAxis == 'Z'){
+                rotationSign = (deltaZ > 0)?'-':'+';
+            }
+            break;
+
+        case 5://frontal
+            if (mouseAxis == 'Y'){
+                rotationSign = (deltaY > 0)?'-':'+';
+            }else if(mouseAxis == 'X'){
+                rotationSign = (deltaX > 0)?'+':'-';
+            }
+            break;
+    }
+
+    //cout << (QString("%1%2%3").arg(rotationSign).arg(axis).arg(slice)).toStdString() << endl;
+
+    return QString("%1%2%3").arg(rotationSign).arg(axis).arg(slice);
 }
-

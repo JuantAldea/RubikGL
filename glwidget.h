@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <QGLFormat>
 #include <QList>
 
+
 #include "rubikCube.h"
 
 //optimizacion: quitar el conjunto de cubitos rotando y añadir un flag a los cubitos
@@ -38,15 +39,15 @@ public:
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
     void rotateBy(int xAngle, int yAngle, int zAngle);
-    void setClearColor(const QColor &color);
-    void axis(void);
     void render();
+    void setClearColor(const QColor &color);
 
 
 signals:
     void clicked();
 
 protected:
+
     void initializeGL();
     void paintGL();
     void resizeGL(int width, int height);
@@ -57,10 +58,14 @@ protected:
     void keyPressEvent(QKeyEvent *event);
     void draw();
     void applyCamera();
+    void applyProjection();
     void pick(int x, int y);
+    void windowToWorldCoords(float x, float y, float *v);
+    void axis(void);
 
     QColor clearColor;
     QPoint lastPos;
+    float lastWorldCoords[3];
     int xRot;
     int yRot;
     int zRot;
@@ -69,8 +74,7 @@ protected:
     rubikCube *cube;
     QList<uint> *pickupSelection;
     QTimeLine *animationTimeLine;
-
-
+    bool showAxis;
 
 private slots:
     void animate();

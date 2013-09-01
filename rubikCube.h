@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <QVector>
 #include <QSet>
 #include "cubie.h"
-
+#include <cmath>
 
 class rubikCube
 {
@@ -35,20 +35,20 @@ class rubikCube
         float rotationAngle;
         float rotationAxis[4];
         int rotatingSlice;
+        bool clockwiseRotation;
         QSet<int> *rotatingCubies;
-        void permutate(int *p, int eje);
-        void desordenar();
 
+        void permutate(int *p, int eje, bool clockwise);
 
 
     public:
         rubikCube();
         ~rubikCube();
-        void rotate(QString rotation);
+        bool rotate(QString rotation);
         void draw();
-        void animate();
+        void updateAnimation();
         void finishAnimation();
-        QString convertirMovimiento(QList<uint> *lista, int deltaX, int deltaY);
+        QString determineRotation(QList<uint> *lista, float deltaX, float deltaY, float deltaZ);
 };
 
 #endif // CUBO_H

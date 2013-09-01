@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg4585"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Documento nuevo 17">
+  <defs
+     id="defs4587">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective4593" />
+    <marker
+       viewBox="0 0 10 10"
+       refY="5"
+       refX="10"
+       orient="auto"
+       markerWidth="4"
+       markerUnits="strokeWidth"
+       markerHeight="3"
+       id="ArrowStart">
+      <path
+         id="path3586"
+         d="M 10 0 L 0 5 L 10 10 z" />
+    </marker>
+    <marker
+       viewBox="0 0 10 10"
+       refY="5"
+       refX="0"
+       orient="auto"
+       markerWidth="4"
+       markerUnits="strokeWidth"
+       markerHeight="3"
+       id="ArrowEnd">
+      <path
+         id="path3583"
+         d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <inkscape:perspective
+       id="perspective5539"
+       inkscape:persp3d-origin="215.661 : 120.203 : 1"
+       inkscape:vp_z="431.32199 : 180.3045 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 180.3045 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5556"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5598"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5634"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5668"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5718"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5751"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5776"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5803"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5850"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5875"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.32"
+     inkscape:cx="280.4378"
+     inkscape:cy="560.3509"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="1432"
+     inkscape:window-height="822"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       orientation="0,1"
+       position="-288.29787,689.3617"
+       id="guide5582" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="3.5211268,643.66197"
+       id="guide5584" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="152.12766,718.08511"
+       id="guide5586" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="211.70213,643.61702"
+       id="guide5588" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="333.09859,552.11268"
+       id="guide5624" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="269.01408,597.88732"
+       id="guide5648" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="359.85915,552.11268"
+       id="guide5741" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="418.30986,576.76056"
+       id="guide5793" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4590">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3588-4"
+       transform="matrix(0.40294765,0,0,0.27990484,334.80025,758.2121)">
+      <path
+         style="fill:#000000;stroke:none"
+         id="path3590-4"
+         d="m 502.97066,27.240762 39.45358,-29.5296368 -39.45358,-29.5293072 -26.02133,0 30.00853,22.4613282 -58.96919,0 0,14.293275 58.75944,0 -29.84585,22.3392418 26.0684,-0.03491 z" />
+    </g>
+    <g
+       id="g5837"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="454.40924"
+         x="418.33035"
+         height="45.819752"
+         width="179.12596"
+         id="rect4595-7-7"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.45530543;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         id="text5107-4-8"
+         y="482.64529"
+         x="426.82742"
+         style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="482.64529"
+           x="426.82742"
+           id="tspan5109-6-1"
+           sodipodi:role="line">Grupo de rotación</tspan></text>
+    </g>
+    <g
+       id="g3588"
+       transform="matrix(0.60840232,0.22977478,-0.2933651,0.22993672,-118.98151,284.63605)"
+       inkscape:transform-center-x="441.37767"
+       inkscape:transform-center-y="-38.290989"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#000000;stroke:none"
+         id="path3590"
+         d="m 502.97066,27.240762 39.45358,-29.5296368 -39.45358,-29.5293072 -26.02133,0 30.00853,22.4613282 -58.96919,0 0,14.293275 58.75944,0 -29.84585,22.3392418 26.0684,-0.03491 z" />
+    </g>
+    <g
+       id="g5695"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="362.69327"
+         x="-20.188192"
+         height="45.828739"
+         width="172.0927"
+         id="rect4595"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.44632098;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         id="text5107"
+         y="392.31808"
+         x="-16.372313"
+         style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="392.31808"
+           x="-16.372313"
+           id="tspan5109"
+           sodipodi:role="line">Cara seleccionada</tspan></text>
+    </g>
+    <g
+       id="g5705"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="408.9523"
+         x="211.90929"
+         height="45.86076"
+         width="148.18105"
+         id="rect4595-7"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.41429925;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         id="text5107-4"
+         y="437.20886"
+         x="218.44269"
+         style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="437.20886"
+           x="218.44269"
+           id="tspan5109-6"
+           sodipodi:role="line">Eje de rotación</tspan></text>
+    </g>
+    <g
+       id="g3588-1"
+       transform="matrix(0.61003176,-0.21707353,-0.2720685,-0.21126564,-119.81661,571.73725)"
+       inkscape:transform-center-x="434.13166"
+       inkscape:transform-center-y="38.406874"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#000000;stroke:none"
+         id="path3590-1"
+         d="m 502.97066,27.240762 39.45358,-29.5296368 -39.45358,-29.5293072 -26.02133,0 30.00853,22.4613282 -58.96919,0 0,14.293275 58.75944,0 -29.84585,22.3392418 26.0684,-0.03491 z" />
+    </g>
+    <g
+       id="g5700"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="454.66623"
+         x="25.55467"
+         height="45.892315"
+         width="126.38161"
+         id="rect4595-1"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.38274464;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         id="text5685"
+         y="482.57822"
+         x="31.427603"
+         style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="482.57822"
+           x="31.427603"
+           id="tspan5687"
+           sodipodi:role="line">gluUnProject</tspan></text>
+    </g>
+    <g
+       id="g5829"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="500.48499"
+         x="167.85612"
+         height="45.804043"
+         width="191.7675"
+         id="rect4595-3"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.47101697;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         id="text5107-43"
+         y="530.09747"
+         x="172.98401"
+         style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="530.09747"
+           x="172.98401"
+           id="tspan5109-8"
+           sodipodi:role="line">Cubito seleccionado</tspan></text>
+    </g>
+    <g
+       id="g3588-0"
+       transform="matrix(0.60840232,0.22977478,-0.2933651,0.22993672,88.749978,330.36575)"
+       inkscape:transform-center-x="441.37767"
+       inkscape:transform-center-y="-38.290989"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#000000;stroke:none"
+         id="path3590-2"
+         d="m 502.97066,27.240762 39.45358,-29.5296368 -39.45358,-29.5293072 -26.02133,0 30.00853,22.4613282 -58.96919,0 0,14.293275 58.75944,0 -29.84585,22.3392418 26.0684,-0.03491 z" />
+    </g>
+    <g
+       id="g3588-1-9"
+       transform="matrix(0.61003176,-0.21707353,-0.2720685,-0.21126564,87.914878,617.51189)"
+       inkscape:transform-center-x="434.13166"
+       inkscape:transform-center-y="38.406874"
+       inkscape:export-filename="/home/juen/Descargas/cubito/interaccion.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#000000;stroke:none"
+         id="path3590-1-6"
+         d="m 502.97066,27.240762 39.45358,-29.5296368 -39.45358,-29.5293072 -26.02133,0 30.00853,22.4613282 -58.96919,0 0,14.293275 58.75944,0 -29.84585,22.3392418 26.0684,-0.03491 z" />
+    </g>
+  </g>
+</svg>

@@ -16,12 +16,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "cubie.h"
 
-float cubie::colorPegatinas[7][3] = {
+float cubie::stickerColor[7][3] = {
     {1, 1, 1}, {1, 0, 0}, {0, 1, 0}, {0, 0, 1},
     {1, 1, 0}, {1, 0.5, 0},{0, 0, 0}
 };
-
-int cubie::geometriacubie[6][4][3] = {
+//Quads para formar los cubitos
+int cubie::cubieGeometry[6][4][3] = {
     { { +1, -1, -1 }, { -1, -1, -1 }, { -1, +1, -1 }, { +1, +1, -1 } }, //trasera
     { { +1, +1, -1 }, { -1, +1, -1 }, { -1, +1, +1 }, { +1, +1, +1 } }, //arriba
     { { +1, -1, +1 }, { +1, -1, -1 }, { +1, +1, -1 }, { +1, +1, +1 } }, //derecha
@@ -29,10 +29,10 @@ int cubie::geometriacubie[6][4][3] = {
     { { +1, -1, +1 }, { -1, -1, +1 }, { -1, -1, -1 }, { +1, -1, -1 } }, //abajo
     { { -1, -1, +1 }, { +1, -1, +1 }, { +1, +1, +1 }, { -1, +1, +1 } }  //frontal
 };
-
-int cubie::permutacionPegatinas[3][4] = {
+//Permutaciones que se realizan sobre las pegatinas
+int cubie::stickerPermutations[3][4] = {
     //(trasera, arriba, derecha, izquierda, abajo, frontal)
-    {0, 4, 5, 1},//rotacion en X
+    {0, 4, 5, 1},//Rotacion en X
     {0, 2, 5, 3},//Rotacion en Y
     {1, 2, 4, 3} //Rotacion en Z
 };
@@ -44,65 +44,105 @@ void cubie::draw()
         glPushName(i);
         glBegin(GL_QUADS);
         for (int j = 0; j < 4; j++) {
-            glColor3fv(colorPegatinas[this->pegatinas->at(i)]);
-            //glVertex3d(0.2 * geometriacubie[i][j][0], 0.2 * geometriacubie[i][j][1], 0.2 * geometriacubie[i][j][2]);
-            glVertex3d(0.5 * geometriacubie[i][j][0], 0.5 * geometriacubie[i][j][1], 0.5 * geometriacubie[i][j][2]);
-
+            glColor3fv(stickerColor[this->stickers->at(i)]);
+            //glVertex3d(0.2 * cubieGeometry[i][j][0], 0.2 * cubieGeometry[i][j][1], 0.2 * cubieGeometry[i][j][2]);
+            glVertex3d(0.5 * cubieGeometry[i][j][0], 0.5 * cubieGeometry[i][j][1], 0.5 * cubieGeometry[i][j][2]);
         }
+
         glEnd();
         glPopName();
     }
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glLineWidth(5);
-    glColor3fv(colorPegatinas[negro]);
+    glColor3fv(stickerColor[negro]);
     for (int i = 0; i < 6; i++){
         glBegin(GL_QUADS);
         for (int j = 0; j < 4; j++) {
-            //glVertex3d(0.21 * geometriacubie[i][j][0], 0.21 * geometriacubie[i][j][1], 0.21 * geometriacubie[i][j][2]);
-            glVertex3d(0.5 * geometriacubie[i][j][0], 0.5 * geometriacubie[i][j][1], 0.5 * geometriacubie[i][j][2]);
+            glVertex3d(0.5 * cubieGeometry[i][j][0], 0.5 * cubieGeometry[i][j][1], 0.50 * cubieGeometry[i][j][2]);
+            //AÑADIR CILINDROS
+            /*
+    glPushMatrix();
+        glTranslated(0,5,0);
+        gluCylinder(quadratic, 1.0f, 1.0f, 10.0f, 100, 1);
+    glPopMatrix();
+*/
         }
         glEnd();
     }
 }
 
 cubie::cubie(cubie &orig) :
-        pegatinas(new QVector<color>)
+        stickers(new QVector<color>),
+        quadratic(NULL)
+
 {
     for (int i=0; i<6; i++){
-        this->pegatinas->push_back(orig.pegatinas->at(i));
+        this->stickers->push_back(orig.stickers->at(i));
     }
+
+    this->createCylinder();
 }
 
 cubie::cubie() :
-        pegatinas(new QVector<color>)
+        stickers(new QVector<color>),
+        quadratic(NULL)
 {
     for (int i=0; i<6; i++){
-        this->pegatinas->push_back(negro);
+        this->stickers->push_back(negro);
     }
+
+    this->createCylinder();
 }
 
-cubie::cubie(color *pegatinas) :
-        pegatinas(new QVector<color>)
+cubie::cubie(color *stickers) :
+        stickers(new QVector<color>),
+        quadratic(NULL)
+
 {
     for (int i=0; i<6; i++){
-        this->pegatinas->push_back(pegatinas[i]);
+        this->stickers->push_back(stickers[i]);
     }
+
+    this->createCylinder();
 }
 
 cubie::~cubie()
 {
-    delete this->pegatinas;
+    delete this->stickers;
+    gluDeleteQuadric(this->quadratic);
 }
 
-void cubie::permutate(int p)
+void cubie::createCylinder()
+{
+    if (this->quadratic != NULL){
+        return;
+    }
+
+    this->quadratic = gluNewQuadric();
+    gluQuadricNormals(this->quadratic, GLU_SMOOTH);
+}
+
+void cubie::permutate(int p, bool clockwise)
 {
     color aux1, aux2;
-    aux2 = this->pegatinas->at(permutacionPegatinas[p][3]);
-    for (int i = 0; i < 4; i++){
-        aux1 = this->pegatinas->at(permutacionPegatinas[p][i]);
-        this->pegatinas->operator [](permutacionPegatinas[p][i]) = aux2;
-        aux2 = aux1;
+
+    if (clockwise){
+        aux2 = this->stickers->at(stickerPermutations[p][3]);
+        for (int i = 0; i < 4; i++){
+            aux1 = this->stickers->at(stickerPermutations[p][i]);
+            this->stickers->operator [](stickerPermutations[p][i]) = aux2;
+            aux2 = aux1;
+        }
     }
+    else{
+        aux2 = this->stickers->at(stickerPermutations[p][0]);
+        for (int i = 3; i >= 0; i--){
+            aux1 = this->stickers->at(stickerPermutations[p][i]);
+            this->stickers->operator [](stickerPermutations[p][i]) = aux2;
+            aux2 = aux1;
+        }
+    }
+
     return;
 }
