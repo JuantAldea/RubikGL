@@ -1,6 +1,6 @@
 RubikGL
 =======
- Rubik Cube game using Qt, OpenGL and GLU
+ Rubik Cube game using Qt, OpenGL, and GLU
  
  Copyright: Juan Antonio Aldea Armenteros (2009).
 
