@@ -4,12 +4,10 @@ This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
@@ -19,19 +17,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 #include "glwidget.h"
 #include <iostream>
+
 using namespace std;
 
 GLWidget::GLWidget(QWidget *parent, QGLWidget *shareWidget):
-        QGLWidget(parent, shareWidget),
-        clearColor(Qt::black),
-        xRot(0),
-        yRot(0),
-        zRot(0),
-        zoomLevel(0),
-        cube(new rubikCube),
-        pickupSelection(new QList<uint>),
-        animationTimeLine(new QTimeLine),
-        showAxis(false)
+    QGLWidget(parent, shareWidget),
+    clearColor(Qt::black),
+    xRot(0),
+    yRot(0),
+    zRot(0),
+    zoomLevel(0),
+    cube(new rubikCube),
+    pickupSelection(new QList<uint>),
+    animationTimeLine(new QTimeLine),
+    showAxis(false)
 {
     this->animationTimeLine->setDuration(500);
     this->animationTimeLine->setUpdateInterval(500/20); //25 por segundo
@@ -40,16 +39,16 @@ GLWidget::GLWidget(QWidget *parent, QGLWidget *shareWidget):
 }
 
 GLWidget::GLWidget (const QGLFormat &format, QWidget *parent, const QGLWidget *shareWidget, Qt::WindowFlags f):
-        QGLWidget(format, parent, shareWidget, f),
-        clearColor(Qt::black),
-        xRot(0),
-        yRot(0),
-        zRot(0),
-        zoomLevel(0),
-        cube(new rubikCube),
-        pickupSelection(new QList<uint>),
-        animationTimeLine(new QTimeLine),
-        showAxis(false)
+    QGLWidget(format, parent, shareWidget, f),
+    clearColor(Qt::black),
+    xRot(0),
+    yRot(0),
+    zRot(0),
+    zoomLevel(0),
+    cube(new rubikCube),
+    pickupSelection(new QList<uint>),
+    animationTimeLine(new QTimeLine),
+    showAxis(false)
 {
     this->animationTimeLine->setDuration(500);
     this->animationTimeLine->setUpdateInterval(500/20); //25 refrescos
@@ -167,14 +166,14 @@ void GLWidget::pick(int x, int y)
     hits = glRenderMode(GL_RENDER);
     cout << "HITS " << hits << endl;
 
-    if (hits > 0){
+    if (hits > 0) {
         minDepth = UINT_MAX;
         int offset = 0;
-        for (int i = 0; i < hits; i++){
-            if (selectionBuffer[offset + 1] < minDepth){
+        for (int i = 0; i < hits; i++) {
+            if (selectionBuffer[offset + 1] < minDepth) {
                 this->pickupSelection->clear();
                 //selection = selectionBuffer[offset + 3]; // guardar todos los nombres
-                for (uint j=0; j< selectionBuffer[offset]; j++){
+                for (uint j=0; j< selectionBuffer[offset]; j++) {
                     //cout << "name: " << selectionBuffer[offset+3+j] << endl;
                     this->pickupSelection->append(selectionBuffer[offset+3+j]);
                 }
@@ -186,7 +185,7 @@ void GLWidget::pick(int x, int y)
         /*
         cout << "Seleccion :";
         for (int i=0; i<this->pickupSelection->size(); i++){
-            cout << this->pickupSelection->at(i) << ", ";
+        	cout << this->pickupSelection->at(i) << ", ";
         }
         cout << endl;
         */
@@ -244,7 +243,7 @@ void GLWidget::render()
 
 void GLWidget::draw()
 {
-    if (this->showAxis){
+    if (this->showAxis) {
         this->axis();
     }
     this->cube->draw();
@@ -319,18 +318,17 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *event)
     dWorldPos[1] = worldPos[1] - this->lastWorldCoords[1];
     dWorldPos[2] = worldPos[2] - this->lastWorldCoords[2];
     //No se debe salir del cubo
-    if (fabs(dWorldPos[0]) <= 3 || fabs(dWorldPos[1]) <= 3 || fabs(dWorldPos[2]) <= 3){
-        if(this->animationTimeLine->state() == QTimeLine::NotRunning){
-            if(fabs(dx) > 10 || fabs(dy) > 10){
-                if(this->cube->rotate(this->cube->determineRotation(this->pickupSelection, dWorldPos[0], dWorldPos[1], dWorldPos[2]))){
+    if (fabs(dWorldPos[0]) <= 3 || fabs(dWorldPos[1]) <= 3 || fabs(dWorldPos[2]) <= 3) {
+        if(this->animationTimeLine->state() == QTimeLine::NotRunning) {
+            if(fabs(dx) > 10 || fabs(dy) > 10) {
+                if(this->cube->rotate(this->cube->determineRotation(this->pickupSelection, dWorldPos[0], dWorldPos[1], dWorldPos[2]))) {
                     this->animationTimeLine->start();
                     this->updateGL();
                 }
                 lastPos = event->pos();
             }
         }
-    }
-    else{
+    } else {
         //se ha salido fuera de rango, tal vez con una seleccion, eliminar dicha seleccion
         this->pickupSelection->clear();
     }
@@ -341,7 +339,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
     //Girar el cubo si no se selecciono nada
     int dx = event->x() - lastPos.x();
     int dy = event->y() - lastPos.y();
-    if (this->pickupSelection->size() == 0){
+    if (this->pickupSelection->size() == 0) {
         if (event->buttons() & Qt::LeftButton) {
             rotateBy(dy, dx, 0);
         } else if (event->buttons() & Qt::RightButton) {
@@ -349,18 +347,16 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
         }
         lastPos = event->pos();
     }
-
 }
 
 void GLWidget::wheelEvent(QWheelEvent *event)
 {
-    if (event->delta() > 0){
+    if (event->delta() > 0) {
         this->zoomLevel -= 1;
-        this->zoomLevel = (this->zoomLevel > -16)?this->zoomLevel:-15;
-    }
-    else{
+        this->zoomLevel = (this->zoomLevel > -16) ? this->zoomLevel : -15;
+    } else {
         this->zoomLevel += 1;
-        this->zoomLevel = (this->zoomLevel < 20)?this->zoomLevel:20;
+        this->zoomLevel = (this->zoomLevel < 20) ? this->zoomLevel : 20;
     }
     this->render();
     this->updateGL();
@@ -368,49 +364,92 @@ void GLWidget::wheelEvent(QWheelEvent *event)
 
 void GLWidget::keyPressEvent(QKeyEvent *event)
 {
-    //si hay una rotacion relalizandose ignora
-    if(this->animationTimeLine->state() != QTimeLine::NotRunning){
+    //si hay una rotacion relalizandose se ignora el evento
+    if(this->animationTimeLine->state() != QTimeLine::NotRunning) {
         return;
     }
 
-    switch(event->key()){
-        case Qt::Key_Space:
-            this->showAxis = !this->showAxis;
-            break;
-        case Qt::Key_Q:
-            this->cube->rotate("+X0");
-            break;
-        case Qt::Key_W:
-            this->cube->rotate("+X1");
-            break;
-        case Qt::Key_E:
-            this->cube->rotate("+X2");
-            break;
-        case Qt::Key_A:
-            this->cube->rotate("+Y0");
-            break;
-        case Qt::Key_S:
-            this->cube->rotate("+Y1");
-            break;
-        case Qt::Key_D:
-            this->cube->rotate("+Y2");
-            break;
-        case Qt::Key_Z:
-            this->cube->rotate("+Z0");
-            break;
-        case Qt::Key_X:
-            this->cube->rotate("+Z1");
-            break;
-        case Qt::Key_C:
-            this->cube->rotate("+Z2");
-            break;
-        default:
-            return;
+    QString rotation_to_perform = "";
+
+    switch(event->key()) {
+    case Qt::Key_Space:
+        this->showAxis = !this->showAxis;
+        break;
+    case Qt::Key_Q:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-X0";
+        } else {
+            rotation_to_perform = "+X0";
+        }
+        break;
+    case Qt::Key_W:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-X1";
+        } else {
+            rotation_to_perform = "+X1";
+        }
+        break;
+    case Qt::Key_E:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-X2";
+        } else {
+            rotation_to_perform = "+X2";
+        }
+        break;
+    case Qt::Key_A:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-Y0";
+        } else {
+            rotation_to_perform = "+Y0";
+        }
+        break;
+    case Qt::Key_S:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-Y1";
+        } else {
+            rotation_to_perform = "+Y1";
+        }
+        break;
+    case Qt::Key_D:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-Y2";
+        } else {
+            rotation_to_perform = "+Y2";
+        }
+        break;
+    case Qt::Key_Z:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-Z0";
+        } else {
+            rotation_to_perform = "+Z0";
+        }
+        break;
+    case Qt::Key_X:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-Z1";
+        } else {
+            rotation_to_perform = "+Z1";
+        }
+        break;
+    case Qt::Key_C:
+        if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+            rotation_to_perform = "-Z2";
+        } else {
+            rotation_to_perform = "+Z2";
+        }
+        break;
+    default:
+        return;
     }
-    if (event->key() != Qt::Key_Space && event->key() != Qt::Key_H){
+
+    if (rotation_to_perform.length() > 0) {
+        this->cube->rotate(rotation_to_perform);
+    }
+
+    if (event->key() != Qt::Key_Space) {
         this->animationTimeLine->start();
     }
-    this->updateGL();
 
-    return;
+    this->updateGL();
 }
+
